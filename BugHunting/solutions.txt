@@ -115,3 +115,82 @@ public void putToCache(PutRecordsRequest putRecordsRequest) {
 	}
 	....
 }
+
+----------------------
+
+PROBLEM 8 SOLUTION
+
+private void shiftRightDestructive(int wordShifts, int bitShiftsInWord, boolean roundUp) {
+
+	if(wordShifts == 0 || bitShiftsInWord == 0) {
+		return ;
+	}
+	
+	assert(wordShifts >= 0);
+	assert(bitShiftsInWord >= 0);
+	assert(bitShiftsInWord < 32);
+	if(wordShifts >= 4) {
+		zeroClear();
+		return ;
+	}
+	
+	final int shiftRestore = 32 - bitShiftsInWord;
+	
+	final boolean norestore = bitShiftsInWord == 0;
+	final int roundCarryNoRestoreMask = 1 << 31;
+	final int roundCarryMask = (1 << (bitShiftsInWord - 1));
+	
+	.....
+}
+
+--------------------
+
+PROBLEM 9 SOLUTION
+
+public void logSargResult(int stripeIx, boolean[] rgsToRead) {
+
+	.....
+	long val;
+	int ix;
+	for(int i = 0, valOffset = 0; i < elements && valOffset <=rgsToRead.length;++i, valOffset+=64){
+		val=0;
+		for(int j = 0;j < 64; ++j){
+			ix = valOffset + j;
+			if( rgsToRead.length <= ix ) break;
+			if( !rgsToRead[ix]) continue;
+			val = val | (1 << j);
+		}
+		if( rgsToRead.length <= ix ) break;
+		.....
+	}
+	....	
+}
+
+---------------------------
+
+PROBLEM 10 SOLUTION
+
+The bug found is that the value 0x0822 is bigger than 1024, for that reason the variable "i" will never reach that value.
+While 0x03ff is 1023 so this value will be reached.
+
+public void testSignSHA256CompleteEvenHeigh2() {
+	....
+	int height = 10;
+	...
+	for(int i = 0; i < (1 << height); i++) {
+		byte[] signature = xmss.sign(new byte[1024]);
+		switch(i) {
+			case 0x005b:
+				assertEquals(signature[0], Hex.toHexString(signature));
+				break;
+			case 0x03ff:
+				assertEquals(signature[1], Hex.toHexString(signature));
+				break;
+		
+			.....
+		}
+	}
+}
+
+-------------------------
+
