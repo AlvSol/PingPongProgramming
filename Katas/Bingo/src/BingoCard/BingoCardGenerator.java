@@ -2,16 +2,17 @@ package BingoCard;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import Caller.BingoCaller;
 
 public class BingoCardGenerator {
 
-	List<Integer>columB;
-	List<Integer>columI;
-	List<Integer>columN;
-	List<Integer>columG;
-	List<Integer>columO;
+	private List<Integer>columB;
+	private List<Integer>columI;
+	private List<Integer>columN;
+	private List<Integer>columG;
+	private List<Integer>columO;
 	
 	
 	
@@ -51,8 +52,25 @@ public class BingoCardGenerator {
 				+ columG + ", columO=" + columO + "]";
 	}
 
-	public static void main(String[]args) {
-		BingoCardGenerator gen = new BingoCardGenerator();
-		System.out.println(gen.toString());
+	public List<Integer> getColumB() {
+		return columB;
 	}
+
+	public List<Integer> getColumI() {
+		return columI;
+	}
+
+	public List<Integer> getColumN() {
+		return columN;
+	}
+
+	public List<Integer> getColumG() {
+		return columG;
+	}
+
+	public List<Integer> getColumO() {
+		return columO;
+	}
+
+	
 }
