@@ -1,0 +1,48 @@
+PROBLEM 1 solution
+
+private boolean checkDimensions(CLIQUEUnit other, int e) {
+	for(int i = 0, j = 0; i<e; i++, j+=2){
+		
+		if(dims[i] != other.dims[i] || bounds[j] != other.bounds[j] || bounds[j+1] != other.bounds[j+1]) {
+			return false;
+		}
+		
+	}
+	
+	return true;
+}
+
+------------------------------
+
+PROBLEM 2 SOLUTION
+
+Because double was a primitive type it couldn't return null, but Double is a class so it can.
+
+public Double computeMean() {
+	return (point.size() == 1) ? points.get(1) : null;
+}
+
+---------------------------------
+
+PROBLEM 3 SOLUTION
+
+protected PreDeConModel computeLocalModel(DoubleDBIList neighbors, ...) {
+
+	final int referenceSetSize = neighbors.size();
+	.....
+	if(referenceSetSize <= 0) {
+		LOG.warning("Empty reference set - should at ñeast include the query point");
+		return new PreDeConModel(Integer.MAX_VALUE, DBIUtil.EMPTYDBIDS);
+	}
+	....
+	for(int d=0; d < dim; d++) {
+		s[d] /= referenceSetSize;
+		mvVar.put(s[d]);
+	}
+	
+	.....
+}
+
+
+------------------
+
