@@ -194,3 +194,29 @@ public void testSignSHA256CompleteEvenHeigh2() {
 
 -------------------------
 
+EXTRA PROBLEM SOLUTION
+
+We have seen that the difference between == and 'Objects.equals' can return different results, and because
+we know 'Objects.equals' is true when two objects have the same content we decided to go with this solution.
+
+@Override
+public boolean equals(Object o) {
+
+	.....
+	CheckpointStating that = (CheckpointStatistics) o;
+	return Objects.equals(id,that.id) && 
+	Objects.equals(id,that.id)
+	&& Objects.equals(savepoint,that.savepoint)
+	&& Objects.equals(triggerTimestamp,that.triggerTimestamp)
+	&& Objects.equals(latestAckTimestamp,that.latestAckTimestamp)
+	&& Objects.equals(stateSize,that.stateSize)
+	&& Objects.equals(duration,that.duration)
+	&& Objects.equals(alignmentBuffered,that.alignmentBuffered)
+	&& Objects.equals(processedData,that.processedData)
+	&& Objects.equals(persistedData,that.persistedData)
+	&& Objects.equals(numSubtasks,that.numSubtasks)
+	&& Objects.equals(numAckSubtasks,that.numAckSubtasks)
+	&& Objects.equals(status,that.status)
+	&& Objects.equals(checkpointType,that.checkpointType)
+	&& Objects.equals(checkpointStatisticsPerTask,that.checkpointStatisticsPerTask);
+}
