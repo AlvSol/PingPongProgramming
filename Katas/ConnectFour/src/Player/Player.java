@@ -5,10 +5,10 @@ import java.util.Random;
 import Grid.Grid;
 
 public class Player {
-    private int ficha;
+    private String ficha;
     private Grid tablero;
 
-    public Player(int ficha, Grid tablero) {
+    public Player(String ficha, Grid tablero) {
         if (ficha != Grid.VACIO) {
             this.ficha = ficha;
         } else {
@@ -17,8 +17,8 @@ public class Player {
         this.tablero = tablero;
     }
 
-    public void putTokenInColumn(int column) {
-        this.tablero.insertToken(this.ficha, column);
+    public boolean putTokenInColumn(int column) {
+        return this.tablero.insertToken(this.ficha, column);
     }
 
     public void seeGridState() {
@@ -26,24 +26,27 @@ public class Player {
     }
 
     public boolean isWinner() {
-        return isWinner(this.ficha);
+        return this.tablero.isWinner(this.ficha);
     }
 
     public static void main(String args[]) {
         int column;
         Random rand = new Random();
-        int i = 0;
         Grid tablero = new Grid();
-        Player p1 = new Player(0, tablero);
-        Player p2 = new Player(1, tablero);
-        while (i < 10) {
-            column = rand.nextInt(Grid.NUMBER_OF_COLUMNS);
-            p1.putTokenInColumn(column);
-            p1.seeGridState();
-            column = rand.nextInt(Grid.NUMBER_OF_COLUMNS);
-            p2.putTokenInColumn(column);
-            p2.seeGridState();
-            i++;
+        Player yelloy = new Player("Y", tablero);
+        Player red = new Player("R", tablero);
+        while (!yelloy.isWinner() && !red.isWinner()) {
+            do {
+                column = rand.nextInt(Grid.NUMBER_OF_COLUMNS);
+            } while (!yelloy.putTokenInColumn(column));
+            yelloy.seeGridState();
+            if (!yelloy.isWinner()) {
+                do {
+                    column = rand.nextInt(Grid.NUMBER_OF_COLUMNS);
+                } while (!red.putTokenInColumn(column));
+                red.seeGridState();
+            }
+
         }
 
     }
